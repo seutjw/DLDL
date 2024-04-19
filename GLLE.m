@@ -136,20 +136,6 @@ for t=1:T
     save('dat.mat','trainDistribution','trainFeature','W','lambda2','lambda3','lambda4','G','fai1','tao','A');
     optim=optimset('Display','on','GoalsExactAchieve','0','MaxIter',50);
     [W,fval]=fminlbfgs(@bfgsProcessW,W,optim);
-    %pred=trainFeature*W;
-%     it=0;
-%     pref=0;
-%     while(it<50)
-%         [fval,gradient]=bfgsProcessW(W);
-%         W=W-0.001*gradient;
-%         it=it+1;
-%         disp(it);
-%         disp(fval);
-%         if(abs(pref-fval)<1e-3)
-%             break;
-%         end
-%         pref=fval;
-%     end
     while(tao<0.002)
         fprintf("tao=%f\n",tao);
         optim=optimset('Display','on','GoalsExactAchieve','0','MaxIter',50);
@@ -166,12 +152,6 @@ for t=1:T
             end
             pref=fval;
         end
-%      optim=optimset('Display','on','GoalsExactAchieve','1','MaxIter',10);
-%     [F,fval]=fminlbfgs(@bfgsProcessF,F,optim);
-    %F=abs(F);
-%     graKL=ones(size(F));
-%     graKL=graKL-log(lldPredict(W,trainFeature));
-%     F=inv((2*lambda3+lambda2*(G+G')+tao))*(fai1+tao*A);
         Gprog=eye(size(F,2),size(F,2))*(1+1/tao);
         for j=1:size(F,1)
             Hprog=zeros(1,size(F,2));
