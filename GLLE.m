@@ -52,11 +52,6 @@ item=rand(size(trainFeature,2),size(trainLabel,2));
 AA=ones(1,size(trainLabel,2));
 lb=zeros(1,size(trainLabel,2));
 options_qp=optimoptions('quadprog','Display','off');
-% F=rand(size(trainLabel));
-% F=trainLabel;
-% m=mean(F,2);
-% me=repmat(m,1,size(F,2));
-% F=F.*me;
 
 sum_label = sum(logicalLabel');
 min_num = min(sum_label);
